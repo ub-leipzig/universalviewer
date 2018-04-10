@@ -1020,12 +1020,12 @@ export class Extension extends BaseExtension implements ISeadragonExtension {
 
         $.getJSON(searchUri, (results: any) => {
 
-            if (results.resources && results.resources.length) {
-                searchResults = searchResults.concat(this.parseAnnotationList(results));
+            if (results['@graph'][0].resources && results['@graph'][0].resources.length) {
+                searchResults = searchResults.concat(this.parseAnnotationList(results['@graph'][0]));
             }
 
-            if (results.next) {
-                this.getSearchResults(results.next, terms, searchResults, cb);
+            if (results['@graph'][0].next) {
+                this.getSearchResults(results['@graph'][0].next, terms, searchResults, cb);
             } else {
                 cb(searchResults);
             }
